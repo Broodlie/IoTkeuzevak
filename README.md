@@ -4,9 +4,9 @@
 ## Introductie:
 
  voor dit IoT project gaan we een systeem maken die kijkt of je koelkast open of dicht is.
- Dit wordt gemaakt met behulp van een LDR senor, raspberry pi pico, thingsspeak account en een nodejs server om 
+ Dit wordt gemaakt met behulp van een LDR senor, raspberry pi pico, thingspeak account en een nodejs server om 
  te kunnen kijken of je koelkast open of dicht is.
-Zo verstuurd de raspberry pi met wifi de gegevens van de LRD naar thingsspeak. de nodejs server vraagt deze gevens van thingsspeak 
+Zo verstuurd de raspberry pi met wifi de gegevens van de LRD naar thingspeak. de nodejs server vraagt deze gevens van thingsspeak 
 om zo aan te kunnen geven of je koelkast open of dicht staat.
  
 ## Pipeline:
@@ -51,9 +51,9 @@ from time import sleep
 import machine
 ```
 
-nu kunner er 4 variable aangemaakt worden om met thingsspiek te communiceren via wifi.
+nu kunner er 4 variablen aangemaakt worden om met thingspiek te communiceren via wifi.
 
-in de ssid en password moet je nog de naam en wachtwoord van je wifi invullen.
+In de variablen ssid en password moet je nog de naam en wachtwoord van je wifi invullen.
 
 Voor de thingspeak api key moet je eersn naar thingspeak gaan, inloggen en bij my channels een new channel aanmaken.
 Er moet minimaal 1 field aangevinked zijn. In deze field is de waarde van je LDR te zien.
@@ -62,12 +62,32 @@ Als je vervolgens naar API key gaat kan je daar de WRITE api key vinden
 ![image](https://user-images.githubusercontent.com/115473282/232504049-59c6ba5f-8fd9-4409-9711-ff7ab392c67f.png)
 ![image](https://user-images.githubusercontent.com/115473282/232504081-642c3b41-3d75-478a-8406-5167d3773507.png)
 
+vervolgens kan je deze key in de api key variable schrijven.
 
-
+De HTTP_HEADERS gaat gebruikt worden om de LDR dat te versturen naar thingspeak
 
 ```py
 ssid = ''
 password = ''
 THINGSPEAK_WRITE_API_KEY = ''
 HTTP_HEADERS = {'Content-Type': 'application/json'} 
+```
+
+
+Om nu met het wifi te connecten maken we de connect functie.
+
+```py
+def connect():
+    #Connect to WLAN
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(ssid, password)
+    while wlan.isconnected() == False:
+        print('Waiting for connection...')
+        sleep(1)
+    ip = wlan.ifconfig()[0]
+    print(f'Connected on {ip}')
+      return ip
+
+connect()
 ```
