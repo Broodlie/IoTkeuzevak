@@ -17,17 +17,13 @@ Demomvideo:
 
 
 Benodigdheden:
--LDR sensor
+- LDR sensor
+- Raspberry pi pico W
+- 2 jump wires
+- micro usb kabel
+- Thingsspeak account
+- Thonny
 
--Raspberry pi pico W
-
--2 jump wires
-
--micro usb kabel
-
--Thingsspeak account
-
--Thonny
 
 
 
