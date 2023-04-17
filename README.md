@@ -62,7 +62,7 @@ THINGSPEAK_WRITE_API_KEY = ''
 HTTP_HEADERS = {'Content-Type': 'application/json'} 
 ```
 
-Voor de thingspeak api key moet je eersn naar thingspeak gaan, inloggen en bij my channels een new channel aanmaken.
+Voor de thingspeak api key moet je eerst naar thingspeak gaan, inloggen en bij my channels een new channel aanmaken.
 Er moet minimaal 1 field aangevinked zijn. In deze field is de waarde van je LDR te zien.
 
 Als je vervolgens naar API key gaat kan je daar de WRITE api key vinden
@@ -92,6 +92,7 @@ connect()
 ```
 
 Als laast moeten we de LDR waardes van pin 27 ophalen en versturen naar thingspeak.
+Dit gebeurd in 
 
 ```py
 while True:
@@ -103,6 +104,21 @@ while True:
     request.close() 
     print(dht_readings) 
 ```
-nu kan je de code runnen en zou je de data van de LDR op tingspeak zien verschijnen.
+nu kan je de code runnen en zou je de data van de LDR op thingspeak zien verschijnen.
 
 ## webApp
+
+Om de webApp te kunnen maken heb je eerst Nodejs nodig, dit kan je in de volgende link downloaden: https://nodejs.org/en 
+
+Als je nodejs hebt gedownload kan je nu een lege folder aan maken en je cmd openen hierin. 
+vervolgens kan je de volgende commands uitvoeren 
+
+```
+npm init
+```
+beantwoord alles met ja, en voer de volgende command uit
+
+```
+npm express
+```
+
