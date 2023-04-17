@@ -64,7 +64,7 @@ Als je vervolgens naar API key gaat kan je daar de WRITE api key vinden
 
 vervolgens kan je deze key in de api key variable schrijven.
 
-De HTTP_HEADERS gaat gebruikt worden om de LDR dat te versturen naar thingspeak
+De HTTP_HEADERS gaat gebruikt worden om de LDR data te versturen naar thingspeak
 
 ```py
 ssid = ''
@@ -104,3 +104,6 @@ while True:
     request.close() 
     print(dht_readings) 
 ```
+nu kan je de code runnen en zou je de data van de LDR op tingspeak zien verschijnen.
+
+## webApp
