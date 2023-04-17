@@ -91,3 +91,16 @@ def connect():
 
 connect()
 ```
+
+Als laast moeten we de LDR waardes van pin 27 ophalen en versturen naar thingspeak.
+
+```py
+while True:
+    ldr = machine.ADC(27) 
+    reading = ldr.read_u16()
+    time.sleep(5) 
+    dht_readings = {'field1':reading} 
+    request = urequests.post( 'http://api.thingspeak.com/update?api_key=' + THINGSPEAK_WRITE_API_KEY, json = dht_readings, headers = HTTP_HEADERS )  
+    request.close() 
+    print(dht_readings) 
+```
