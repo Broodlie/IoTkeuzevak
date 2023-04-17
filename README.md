@@ -32,7 +32,7 @@ als je dat hebt gedaan kunnen we de bekabeling aansluiten.
 
 ![image](https://user-images.githubusercontent.com/115473282/232494034-e0017f7c-e127-4d10-9462-6dbddb1bfc87.png)
 
-De zwarte kabel is de ground en moet dus in de ground, de groene kabel is waar de data vandaan komt en moet in pin 27. 
+De zwarte kabel is de ground en moet dus in de GND/pin 38, de groene kabel is waar de data vandaan komt en moet in  pin 27. 
 Het maakt voor de LDR niet uit aan welke kant je deze twee kabels aansluit.
 
 
@@ -55,6 +55,13 @@ nu kunner er 4 variablen aangemaakt worden om met thingspiek te communiceren via
 
 In de variablen ssid en password moet je nog de naam en wachtwoord van je wifi invullen.
 
+```py
+ssid = ''
+password = ''
+THINGSPEAK_WRITE_API_KEY = ''
+HTTP_HEADERS = {'Content-Type': 'application/json'} 
+```
+
 Voor de thingspeak api key moet je eersn naar thingspeak gaan, inloggen en bij my channels een new channel aanmaken.
 Er moet minimaal 1 field aangevinked zijn. In deze field is de waarde van je LDR te zien.
 
@@ -65,14 +72,6 @@ Als je vervolgens naar API key gaat kan je daar de WRITE api key vinden
 vervolgens kan je deze key in de api key variable schrijven.
 
 De HTTP_HEADERS gaat gebruikt worden om de LDR data te versturen naar thingspeak
-
-```py
-ssid = ''
-password = ''
-THINGSPEAK_WRITE_API_KEY = ''
-HTTP_HEADERS = {'Content-Type': 'application/json'} 
-```
-
 
 Om nu met het wifi te connecten maken we de connect functie.
 
