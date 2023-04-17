@@ -43,6 +43,11 @@ Dit kan via de volgende link: https://thonny.org/
 
 Als je dit gedaan hebt kan je in thonny een nieuwe file maken, ik heb hem LDR.py genoemd.
 Vervolgens kan je 
-- [x] deez
-- [ ] nuts
+```
+dezzdfasdfasdfads
+
+dfasd
+
+aaa
+```
 
