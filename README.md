@@ -13,7 +13,7 @@ om zo aan te kunnen geven of je koelkast open of dicht staat.
 ![image](https://user-images.githubusercontent.com/115473282/232488705-e226af8a-86a3-4c4a-a2ea-f666278bd9f5.png)
 
 
-## Demomvideo:
+## Demovideo:
 
 
 ## Benodigdheden:
@@ -121,5 +121,17 @@ beantwoord alles met ja, en voer de volgende command uit
 ```
 npm express
 ```
-Maak nu de index.js file aan. dit word de back-end van de webApp
+Maak nu de index.js file aan. dit word de back-end van de webApp.
+
+Als eerst maken we wat variable aan en include we een librarie 
+
+```js
+const port = 3000
+const express = require('express')
+const app = express()
+const path = require('path');
+const request = require('request');
+
+let data
+```
 
