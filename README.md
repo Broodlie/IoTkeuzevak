@@ -14,7 +14,7 @@ om zo aan te kunnen geven of je koelkast open of dicht staat.
 
 
 ## Demovideo:
-*zie IoTDemo.mp4 video 
+https://youtube.com/shorts/38bVAmcKxrU?feature=share
 
 ## Benodigdheden:
 - LDR sensor
