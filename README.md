@@ -15,7 +15,7 @@ om zo aan te kunnen geven of je koelkast open of dicht staat.
 
 ## Demovideo:
 https://youtube.com/shorts/38bVAmcKxrU?feature=share
-
+met voice over
 ## Benodigdheden:
 - LDR sensor
 - Raspberry pi pico W
