@@ -265,4 +265,6 @@ Nu alle code geschreven is kan je naar de folder gaan waar alle code van de webA
 node index.js
 ```
 ga naar de localhost:3000 in je browser.
-als het goed is zie je nu je eigen webApp.
+
+Als het goed is zie je nu je eigen webApp.
+
