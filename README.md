@@ -8,6 +8,8 @@
  te kunnen kijken of je koelkast open of dicht is.
 Zo verstuurd de raspberry pi met wifi de gegevens van de LRD naar thingspeak. de nodejs server vraagt deze gevens van thingsspeak 
 om zo aan te kunnen geven of je koelkast open of dicht staat.
+
+De reden dat ik dit project ben begonnen is, omdat ik nog geen ervaring had met javaScript en html. Ook is het idee om te kunnen controlleren of je koelkast open of dicht is ontstaan nadat ik een keer de koelkast vergeten was dicht te doen.
  
 ## Pipeline:
 ![image](https://user-images.githubusercontent.com/115473282/232488705-e226af8a-86a3-4c4a-a2ea-f666278bd9f5.png)
