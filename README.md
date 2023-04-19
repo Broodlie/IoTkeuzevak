@@ -51,7 +51,7 @@ from time import sleep
 import machine
 ```
 
-nu kunner er 4 variablen aangemaakt worden om met thingspiek te communiceren via wifi.
+Nu kunner er 4 variablen aangemaakt worden om met thingspiek te communiceren via wifi.
 
 In de variablen ssid en password moet je nog de naam en wachtwoord van je wifi invullen.
 
@@ -69,7 +69,7 @@ Als je vervolgens naar API key gaat kan je daar de WRITE api key vinden
 ![image](https://user-images.githubusercontent.com/115473282/232504049-59c6ba5f-8fd9-4409-9711-ff7ab392c67f.png)
 ![image](https://user-images.githubusercontent.com/115473282/232504081-642c3b41-3d75-478a-8406-5167d3773507.png)
 
-vervolgens kan je deze key in de api key variable schrijven.
+Vervolgens kan je deze key in de api key variable schrijven.
 
 De HTTP_HEADERS gaat gebruikt worden om de LDR data te versturen naar thingspeak
 
@@ -104,7 +104,7 @@ while True:
     request.close() 
     print(dht_readings) 
 ```
-nu kan je de code runnen en zou je de data van de LDR op thingspeak zien verschijnen.
+Nu kan je de code runnen en zou je de data van de LDR op thingspeak zien verschijnen.
 
 ## webApp
 
@@ -116,7 +116,7 @@ vervolgens kan je de volgende commands uitvoeren
 ```
 npm init
 ```
-beantwoord alles met ja, en voer de volgende command uit
+Beantwoord alles met ja, en voer de volgende command uit
 
 ```
 npm express
@@ -134,7 +134,7 @@ const request = require('request');
 
 let data
 ```
-hierna worden er eindpoints gemaakt om naar de html pagina te gaan en om een json bestand te versturen naar de webpagina met de data van thingspeak.
+Hierna worden er eindpoints gemaakt om naar de html pagina te gaan en om een json bestand te versturen naar de webpagina met de data van thingspeak.
 
 ```js
 app.get('/', function(req, res) {
@@ -150,7 +150,7 @@ app.use(express.static('public'));
 app.use(express.json());
 ```
 
-om de server optestarten gebruiken we de volgende stuk code.
+Om de server optestarten gebruiken we de volgende stuk code.
 de server staat op een localhost, alleen mensen van de zelfde netwerk kunnen op de webpagina komen.
 ```js
 app.listen(port, () => {
@@ -158,9 +158,11 @@ app.listen(port, () => {
 })
 
 ```
-de volgende functie haalt de data van thingspeak op.
-LET OP! op de plek met **** moet je read a channel feed url komen van thingspeak
-de setInterval functie zorgt ervoor dat elke seconden 
+De volgende functie haalt de data van thingspeak op.
+
+LET OP! op de plek met **** moet je read a channel feed url komen van thingspeak.
+
+De setInterval functie zorgt ervoor dat elke 3 seconden nieuwe informatie wordt opgehaald.
 ```js
 //haalt data uit thingspeak 
 let ophaal = function(){
@@ -177,3 +179,88 @@ setInterval(function(){
 }, 3000)
 
 ```
+Dit is de volledige back end, nu gaan we de front end maken.
+
+Voor de webpagina is html nodig, maak een bestand genaamd index.html en kopieer de volgende code.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="eerste">-</h1>
+    <h2 class="tweede">-</h2>
+    <script src="front.js"></script>
+    <img class="Cat">
+</body>
+</html>
+```
+
+in deze code worden er drie calssen gemaakt, in class "eerste" wordt de data van de sensor in geschreven. in de tweede class gaan we een foto in zetten die vervolgens veranderd wordt. en de derde class "Cat" is voor de foto 
+
+
+ Maak nu in de zelfde folder als index.js een public folder aan met hierin een front.js file.
+
+de eerste functie fetchdata haald de juiste data (de LDR waardes) uit de juiste field.
+
+```js
+$(document).ready(function(){
+
+    //haalt de data uit de juiste field
+    fetchdata = function(){
+        fetch('/data').then(response => response.json()).then (jsonD => {
+
+            $(".eerste").text(jsonD["feeds"][0]["field1"]) 
+        });
+    }
+})
+```
+hierna maken we de functie fetcheck om de afbeelding en tekst te veranderen gebaseerd op de LDR waarde. 
+```js
+//kijkt wat de waarde van de LDR is en past de pagina hierop aan
+fetcheck = function(){
+    data = $(".eerste").text()    
+    if(data <= 500){
+
+        $(".tweede").text("is uw koelkast open: JAAA!")
+        $(".Cat").attr("src","SadCat.jpg");
+    }
+    else{
+    $(".tweede").text("is uw koelkast open: nope")
+    $(".Cat").attr("src","HappyCat.jpg");
+    }
+}
+```
+
+dan zorgen we ervoor dat de dat en het veranderen van de afbeelding en tekst om de twee seconden gebeurd.
+
+```js
+//pagina wordt gerefreshed om de 2 seconden
+setInterval(function(){
+    fetchdata()
+    fetcheck()
+},2000)
+```
+de afbeeldingen die je wilt gebruiken moet je in de public folder opslaan. Ook moet je de naam "SadCat.jpg" en "HappyCat.jpg" veranderen naar de naam van de zelfgekozen afbeeldingen.
+
+
+als laatst maken we in de public folder een style.css file aan om de achtergrond kleur te kunnen veranderen.
+```css
+body{  
+    background-color: lightcyan;
+}
+```
+Nu alle code geschreven is kan je naar de folder gaan waar alle code van de webApp in staat. vervolgens cmd in de zoekbalk schrijven en de volgende command uitvoeren
+
+```
+node index.js
+```
+ga naar de localhost:3000 in je browser.
+als het goed is zie je nu je eigen webApp.
