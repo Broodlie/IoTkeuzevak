@@ -14,7 +14,7 @@ om zo aan te kunnen geven of je koelkast open of dicht staat.
 
 
 ## Demovideo:
-
+*zie IoTDemo.mp4 video 
 
 ## Benodigdheden:
 - LDR sensor
@@ -124,7 +124,7 @@ npm express
 Maak nu de index.js file aan. dit word de back-end van de webApp.
 
 Als eerst maken we wat variable aan en include we een librarie 
-
+Ook maken we data aan. hierin wordt de data van thingsspeak in opgeslagen.
 ```js
 const port = 3000
 const express = require('express')
@@ -134,4 +134,46 @@ const request = require('request');
 
 let data
 ```
+hierna worden er eindpoints gemaakt om naar de html pagina te gaan en om een json bestand te versturen naar de webpagina met de data van thingspeak.
 
+```js
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/index.html'));
+})
+app.get('/data', function(req,res){
+  res.type('json').send(data)
+})
+```
+Vervolgens gebruiken we app.use om de public files en json te kunnen gebruiken.
+```js
+app.use(express.static('public'));
+app.use(express.json());
+```
+
+om de server optestarten gebruiken we de volgende stuk code.
+de server staat op een localhost, alleen mensen van de zelfde netwerk kunnen op de webpagina komen.
+```js
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+```
+de volgende functie haalt de data van thingspeak op.
+LET OP! op de plek met **** moet je read a channel feed url komen van thingspeak
+de setInterval functie zorgt ervoor dat elke seconden 
+```js
+//haalt data uit thingspeak 
+let ophaal = function(){
+  request('******',(err,res,body) => { //read a Channel feed 
+  
+  data = JSON.parse(body)
+  console.log(data)
+
+  });
+}
+//informatie wordt om de 3 seconden opgehaald 
+setInterval(function(){
+  ophaal()
+}, 3000)
+
+```
