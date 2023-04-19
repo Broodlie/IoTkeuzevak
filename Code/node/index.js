@@ -22,16 +22,16 @@ app.listen(port, () => {
 })
 //haalt data uit thingspeak 
 let ophaal = function(){
-  request('****************',(err,res,body) => { //get key van thingspeak
+  request('******',(err,res,body) => { //read a Channel feed
   
   data = JSON.parse(body)
   console.log(data)
 
   });
 }
-//informatie wordt om de seconden opgehaald 
+//informatie wordt om de 3 seconden opgehaald 
 setInterval(function(){
   ophaal()
-}, 1000)
+}, 3000)
 
 
